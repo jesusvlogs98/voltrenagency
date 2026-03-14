@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltren Agency — Built to Dominate</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #F8F9FB;
+    --off-white: #EEF1F6;
+    --light-gray: #C8D0DC;
+    --mid-gray: #7A8899;
+    --dark-gray: #1C2431;
+    --black: #0A0E14;
+    --blue: #1A6CFF;
+    --blue-deep: #0A3B99;
+    --blue-glow: rgba(26,108,255,0.15);
+    --blue-light: #E0EBFF;
+    --steel: #3A4D66;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(26,108,255,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: rgba(10,14,20,0.85);
+    backdrop-filter: blur(20px);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo svg { width: 32px; height: 32px; }
+
+  .nav-wordmark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+
+  .nav-wordmark span { color: var(--blue); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--blue) !important;
+    color: var(--white) !important;
+    padding: 10px 24px;
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: #0A5AE8 !important;
+    transform: translateY(-1px);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 140px 60px 100px;
+    overflow: hidden;
+  }
+
+  /* Grid background lines */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,108,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,108,255,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  /* Blue glow orb */
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(26,108,255,0.12) 0%, transparent 70%);
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 140px);
+    letter-spacing: 4px;
+    line-height: 0.92;
+    color: var(--white);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-title .accent { color: var(--blue); }
+
+  .hero-title .outline {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+    color: transparent;
+  }
+
+  .hero-body {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--mid-gray);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-body strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  .btn-primary:hover::before { transform: translateX(100%); }
+  .btn-primary:hover { background: #0A5AE8; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(26,108,255,0.3); }
+
+  .btn-ghost {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--white); }
+
+  .btn-ghost::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  /* Hero stats */
+  .hero-stats {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .stat-item { text-align: right; }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-number span { color: var(--blue); }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(26,108,255,0.04);
+    overflow: hidden;
+    padding: 16px 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .marquee-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--blue);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 120px 60px;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 72px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 3px;
+    line-height: 0.95;
+    color: var(--white);
+  }
+
+  .section-title span { color: var(--blue); }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    max-width: 320px;
+    text-align: right;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--dark-gray);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+    cursor: none;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover { background: #222C3A; }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--blue);
+    margin-bottom: 32px;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+  }
+
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.7;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .service-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--steel);
+    border: 1px solid var(--steel);
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  /* ── WHY VOLTREN ── */
+  .why {
+    padding: 120px 60px;
+    background: var(--dark-gray);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(26,108,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 72px;
+  }
+
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 28px 32px;
+    background: rgba(10,14,20,0.5);
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .why-item:hover {
+    border-left-color: var(--blue);
+    background: rgba(26,108,255,0.05);
+  }
+
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--blue);
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.4;
+  }
+
+  .why-text h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .why-text p {
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.6;
+  }
+
+  .why-visual {
+    position: relative;
+  }
+
+  .metrics-card {
+    background: var(--black);
+    border: 1px solid rgba(26,108,255,0.15);
+    padding: 40px;
+    position: relative;
+  }
+
+  .metrics-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .metric-row:last-child { border-bottom: none; }
+
+  .metric-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+  }
+
+  .metric-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .metric-value span { color: var(--blue); }
+
+  .metric-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .metric-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 2px;
+    animation: fillBar 1.5s ease forwards;
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+  }
+
+  /* ── CONTACT / LEAD FORM ── */
+  .contact {
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(26,108,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+    margin-top: 72px;
+  }
+
+  .contact-left h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 3px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .contact-left h3 span { color: var(--blue); }
+
+  .contact-left p {
+    font-size: 15px;
+    color: var(--mid-gray);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--mid-gray);
+  }
+
+  .contact-info-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* FORM */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--blue);
+    text-transform: uppercase;
+    padding: 14px 20px 0;
+    background: var(--dark-gray);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-bottom: none;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--dark-gray);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-top: none;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 12px 20px 16px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-group select {
+    cursor: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8899' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 44px;
+  }
+
+  .form-group select option {
+    background: var(--dark-gray);
+    color: var(--white);
+  }
+
+  .form-group textarea {
+    resize: none;
+    height: 100px;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: rgba(26,108,255,0.4);
+    background: #1C2431;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--steel);
+  }
+
+  .form-submit {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 22px;
+    border: none;
+    cursor: none;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .form-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  .form-submit:hover::before { transform: translateX(100%); }
+  .form-submit:hover { background: #0A5AE8; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-wordmark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+
+  .footer-wordmark span { color: var(--blue); }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--steel);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .hero-stats { position: static; margin-top: 48px; flex-wrap: wrap; gap: 24px; }
+    .hero-stats .stat-item { text-align: left; }
+    .services { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .section-desc { text-align: left; }
+    .why { padding: 80px 24px; }
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+    .contact { padding: 80px 24px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 40px 24px; flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="4,8 20,8 32,40 44,8 60,8 36,56 28,56" fill="#1A6CFF"/>
+    </svg>
+    <div class="nav-wordmark">VOLTR<span>EN</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Marketing & Advertising Agency · Sarasota, FL</div>
+
+    <h1 class="hero-title">
+      YOUR BRAND.<br>
+      <span class="accent">AMPLIFIED.</span><br>
+      <span class="outline">DOMINANT.</span>
+    </h1>
+
+    <p class="hero-body">
+      We combine <strong>high-impact content production</strong> with precision paid media to turn your brand into a market force. No fluff — just <strong>measurable results</strong> at full voltage.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Growing Now</a>
+      <a href="#services" class="btn-ghost">See Our Services</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-number">3<span>X</span></div>
+      <div class="stat-label">Avg. ROAS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">48<span>H</span></div>
+      <div class="stat-label">Onboarding</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100<span>%</span></div>
+      <div class="stat-label">Dedicated</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <!-- First set -->
+    <div class="marquee-item"><span>Meta Ads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Google Ads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Video Production</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Brand Strategy</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Content Creation</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Lead Generation</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Ad Creative</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Analytics & Reporting</span><div class="marquee-dot"></div></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item"><span>Meta Ads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Google Ads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Video Production</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Brand Strategy</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Content Creation</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Lead Generation</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Ad Creative</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Analytics & Reporting</span><div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">OUR<br><span>SERVICES</span></h2>
+    </div>
+    <p class="section-desc">Three core offerings built to generate leads, build authority, and scale your revenue.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <rect x="4" y="8" width="40" height="28" rx="1" stroke="#1A6CFF" stroke-width="1.5"/>
+        <path d="M16 36v4M32 36v4M10 40h28" stroke="#1A6CFF" stroke-width="1.5"/>
+        <path d="M14 24l6-6 6 6 8-8" stroke="#1A6CFF" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-name">PAID ADS</div>
+      <p class="service-desc">Data-driven Meta and Google campaigns engineered for maximum ROAS. We build, manage, and scale your paid media with full transparency.</p>
+      <div class="service-tags">
+        <span class="service-tag">Meta Ads</span>
+        <span class="service-tag">Google Ads</span>
+        <span class="service-tag">Retargeting</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">02</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <rect x="6" y="10" width="36" height="24" rx="1" stroke="#1A6CFF" stroke-width="1.5"/>
+        <circle cx="24" cy="22" r="6" stroke="#1A6CFF" stroke-width="1.5"/>
+        <path d="M24 16v-4M24 32v4M30 22h4M14 22h4" stroke="#1A6CFF" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-name">VIDEO & CONTENT</div>
+      <p class="service-desc">High-production video and photo content built specifically for ads. We handle concept, production, and delivery — ready to convert.</p>
+      <div class="service-tags">
+        <span class="service-tag">Ad Creatives</span>
+        <span class="service-tag">Reels/TikTok</span>
+        <span class="service-tag">Photography</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">03</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M8 40V20l16-12 16 12v20H8z" stroke="#1A6CFF" stroke-width="1.5"/>
+        <path d="M18 40v-10h12v10" stroke="#1A6CFF" stroke-width="1.5"/>
+        <circle cx="24" cy="18" r="3" stroke="#1A6CFF" stroke-width="1.5"/>
+      </svg>
+      <div class="service-name">BRAND STRATEGY</div>
+      <p class="service-desc">From positioning to visual identity, we build brands that command attention and create trust — before the first ad is ever shown.</p>
+      <div class="service-tags">
+        <span class="service-tag">Positioning</span>
+        <span class="service-tag">Identity</span>
+        <span class="service-tag">Messaging</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY VOLTREN ── -->
+<section class="why" id="why">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">Why Voltren</div>
+      <h2 class="section-title">WE DON'T<br><span>JUST RUN ADS</span></h2>
+    </div>
+    <p class="section-desc">Most agencies separate strategy from execution. We don't — every decision is built for results.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-list reveal">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <div class="why-text">
+          <h4>Full-Stack Execution</h4>
+          <p>We produce the content AND run the ads. No handoffs, no gaps, no excuses.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <div class="why-text">
+          <h4>Data First, Always</h4>
+          <p>Every campaign decision is backed by numbers. You get a live dashboard — not a monthly PDF.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <div class="why-text">
+          <h4>Dedicated Focus</h4>
+          <p>We don't juggle 50 clients. Your brand gets real attention and a real strategy.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <div class="why-text">
+          <h4>Built to Scale</h4>
+          <p>We build systems that grow with you — so when you're ready to scale, the infrastructure is already there.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual reveal">
+      <div class="metrics-card">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--mid-gray);text-transform:uppercase;margin-bottom:24px;">Sample Campaign Results</div>
+        <div class="metric-row">
+          <div>
+            <div class="metric-label">Return on Ad Spend</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:85%"></div></div>
+          </div>
+          <div class="metric-value">3.8<span>X</span></div>
+        </div>
+        <div class="metric-row">
+          <div>
+            <div class="metric-label">Cost Per Lead Reduction</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:62%"></div></div>
+          </div>
+          <div class="metric-value">-62<span>%</span></div>
+        </div>
+        <div class="metric-row">
+          <div>
+            <div class="metric-label">Revenue Growth (90 days)</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:78%"></div></div>
+          </div>
+          <div class="metric-value">+78<span>%</span></div>
+        </div>
+        <div class="metric-row">
+          <div>
+            <div class="metric-label">Engagement Rate</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:94%"></div></div>
+          </div>
+          <div class="metric-value">9.4<span>%</span></div>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-top:20px;text-transform:uppercase;">* Based on average client results</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">Let's Work</div>
+      <h2 class="section-title">START YOUR<br><span>GROWTH</span></h2>
+    </div>
+    <p class="section-desc">Tell us about your brand. We'll respond within 24 hours with a custom strategy overview.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <h3>READY TO<br><span>DOMINATE</span><br>YOUR MARKET?</h3>
+      <p>Whether you're a local business, an e-commerce brand, or a growing company — if you're serious about results, we want to talk.</p>
+      <div class="contact-info">
+        <div class="contact-info-item">hello@voltren.com</div>
+        <div class="contact-info-item">Sarasota, FL — Serving clients nationwide</div>
+        <div class="contact-info-item">Response within 24 hours guaranteed</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Company / Brand</label>
+          <input type="text" placeholder="Your company name">
+        </div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select required>
+            <option value="" disabled selected>Select a service</option>
+            <option>Paid Ads (Meta / Google)</option>
+            <option>Video & Content Production</option>
+            <option>Brand Strategy</option>
+            <option>Full Package</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monthly Budget</label>
+          <select>
+            <option value="" disabled selected>Select your budget</option>
+            <option>$1,000 – $2,500</option>
+            <option>$2,500 – $5,000</option>
+            <option>$5,000 – $10,000</option>
+            <option>$10,000+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Goals</label>
+          <textarea placeholder="What are you trying to achieve in the next 90 days?"></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">
+          Send My Information →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+      <polygon points="4,8 20,8 32,40 44,8 60,8 36,56 28,56" fill="#1A6CFF"/>
+    </svg>
+    <div class="footer-wordmark">VOLTR<span>EN</span> AGENCY</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Voltren Agency · All Rights Reserved</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Hover effects on cursor
+  document.querySelectorAll('a, button, .service-card, .why-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1.8)';
+      cursorRing.style.borderColor = 'rgba(26,108,255,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorRing.style.borderColor = 'rgba(26,108,255,0.5)';
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#0A3B99';
+    setTimeout(() => {
+      btn.textContent = 'Send My Information →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
