@@ -1153,6 +1153,16 @@
           <label>Company / Brand</label>
           <input type="text" placeholder="Your company name">
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" placeholder="Sarasota, FL">
+          </div>
+        </div>
         <div class="form-group">
           <label>Service Interested In</label>
           <select required>
@@ -1263,9 +1273,11 @@
       lastName:  form[1].value,
       email:     form[2].value,
       company:   form[3].value,
-      service:   form[4].value,
-      budget:    form[5].value,
-      message:   form[6].value
+      phone:     form[4].value,
+      city:      form[5].value,
+      service:   form[6].value,
+      budget:    form[7].value,
+      message:   form[8].value
     };
 
     try {
