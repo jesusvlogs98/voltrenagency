@@ -1127,7 +1127,7 @@
       <h3>READY TO<br><span>DOMINATE</span><br>YOUR MARKET?</h3>
       <p>Whether you're a local business, an e-commerce brand, or a growing company — if you're serious about results, we want to talk.</p>
       <div class="contact-info">
-        <div class="contact-info-item">hello@voltren.com</div>
+        <div class="contact-info-item">hello@voltrenagency.com</div>
         <div class="contact-info-item">Sarasota, FL — Serving clients nationwide</div>
         <div class="contact-info-item">Response within 24 hours guaranteed</div>
       </div>
@@ -1167,10 +1167,10 @@
           <label>Monthly Budget</label>
           <select>
             <option value="" disabled selected>Select your budget</option>
-            <option>$1,000 – $2,500</option>
-            <option>$2,500 – $5,000</option>
-            <option>$5,000 – $10,000</option>
-            <option>$10,000+</option>
+            <option value="$1,000 - $2,000">$1,000 - $2,000</option>
+            <option value="$2,500 - $5,000">$2,500 - $5,000</option>
+            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+            <option value="$10,000+">$10,000+</option>
           </select>
         </div>
         <div class="form-group">
@@ -1198,7 +1198,7 @@
     <li><a href="#why">Why Us</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="footer-copy">© 2025 Voltren Agency · All Rights Reserved</div>
+  <div class="footer-copy">© 2026 Voltren Agency · voltrenagency.com · All Rights Reserved</div>
 </footer>
 
 <script>
@@ -1247,17 +1247,46 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  // Webhook URL
+  const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads';
+
   // Form submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Message Sent ✓';
-    btn.style.background = '#0A3B99';
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const form = e.target;
+    const formData = {
+      firstName: form[0].value,
+      lastName:  form[1].value,
+      email:     form[2].value,
+      company:   form[3].value,
+      service:   form[4].value,
+      budget:    form[5].value,
+      message:   form[6].value
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body: formData })
+      });
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#0A3B99';
+      form.reset();
+    } catch(err) {
+      btn.textContent = 'Error — Try Again';
+      btn.style.background = '#FF3B5C';
+    }
+
     setTimeout(() => {
       btn.textContent = 'Send My Information →';
       btn.style.background = '';
-      e.target.reset();
-    }, 3000);
+      btn.disabled = false;
+    }, 4000);
   }
 </script>
 </body>
