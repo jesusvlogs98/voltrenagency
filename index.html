@@ -205,15 +205,21 @@
   }
 
   .nav-audit {
-    color: var(--blue) !important;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--blue);
     border: 1px solid rgba(26,108,255,0.45);
     padding: 9px 18px;
-    transition: background 0.2s, color 0.2s !important;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
   }
 
   .nav-audit:hover {
     background: var(--blue-glow);
-    color: var(--white) !important;
+    color: var(--white);
   }
 
   .lang-toggle {
@@ -968,8 +974,12 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 20px 16px; }
     .nav-links { display: none; }
+    .nav-right { gap: 10px; }
+    .nav-audit { padding: 8px 10px; letter-spacing: 1px; }
+    .lang-toggle { padding: 8px 10px; letter-spacing: 1px; }
+    .nav-wordmark { font-size: 22px; letter-spacing: 2px; }
     .hero { padding: 120px 24px 80px; }
     .hero-stats { position: static; margin-top: 48px; flex-wrap: wrap; gap: 24px; }
     .hero-stats .stat-item { text-align: left; }
@@ -1005,9 +1015,9 @@
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#why">Why Us</a></li>
-      <li><a href="audit.html" class="nav-audit">Free Audit</a></li>
       <li><a href="#contact" class="nav-cta">Get Started</a></li>
     </ul>
+    <a href="audit.html" class="nav-audit">Free Audit</a>
     <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Cambiar idioma / Switch language">ES</button>
   </div>
 </nav>
@@ -1416,7 +1426,7 @@
   const ES_MAP = [
     ['.nav-links a[href="#services"]', 0, 'Servicios'],
     ['.nav-links a[href="#why"]', 0, 'Por Qué Nosotros'],
-    ['.nav-links a[href="audit.html"]', 0, 'Auditoría Gratis'],
+    ['.nav-audit', 0, 'Auditoría Gratis'],
     ['.nav-links a.nav-cta', 0, 'Empezar'],
     ['.hero-eyebrow', 0, 'Agencia de Marketing y Publicidad · Sarasota, FL'],
     ['.hero-title', 0, 'TU MARCA.<br><span class="accent">AMPLIFICADA.</span><br><span class="outline">DOMINANTE.</span>'],

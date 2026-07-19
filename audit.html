@@ -79,10 +79,18 @@
   .nav-links a:hover { color: var(--white); }
 
   .nav-audit {
-    color: var(--blue) !important;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--blue);
     border: 1px solid rgba(26,108,255,0.45);
     padding: 9px 18px;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
   }
+  .nav-audit:hover { background: var(--blue-glow); color: var(--white); }
 
   .nav-cta {
     background: var(--blue) !important;
@@ -355,8 +363,12 @@
   }
 
   @media (max-width: 700px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 20px 16px; }
     .nav-links { display: none; }
+    .nav-right { gap: 10px; }
+    .nav-audit { padding: 8px 10px; letter-spacing: 1px; }
+    .lang-toggle { padding: 8px 10px; letter-spacing: 1px; }
+    .nav-wordmark { font-size: 22px; letter-spacing: 2px; }
     .audit-hero { padding: 140px 24px 40px; }
     .q-card { flex-direction: column; align-items: flex-start; }
     .q-btns { align-self: flex-end; }
@@ -379,9 +391,9 @@
     <ul class="nav-links">
       <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
       <li><a href="index.html#why" data-i18n="nav.why">Why Us</a></li>
-      <li><a href="audit.html" class="nav-audit" data-i18n="nav.audit">Free Audit</a></li>
       <li><a href="index.html#contact" class="nav-cta" data-i18n="nav.cta">Get Started</a></li>
     </ul>
+    <a href="audit.html" class="nav-audit" data-i18n="nav.audit">Free Audit</a>
     <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Cambiar idioma / Switch language">ES</button>
   </div>
 </nav>
