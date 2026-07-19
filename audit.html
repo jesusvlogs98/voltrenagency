@@ -34,20 +34,20 @@
 <!-- ── HEADER ── -->
 <header class="audit-hero">
   <div class="audit-glow"></div>
-  <div class="audit-eyebrow" data-i18n="h.eyebrow">Free Self-Audit · Instant Results</div>
+  <div class="audit-eyebrow" data-i18n="h.eyebrow">Autoauditoría Gratis · Resultado Inmediato</div>
   <h1 class="audit-title" data-i18n="h.title">THE 5-MINUTE<br><span>ADS AUDIT</span></h1>
   <p class="audit-sub" data-i18n="h.sub">The exact checklist we use to diagnose <strong>why Meta Ads aren't converting</strong>. Answer 7 questions honestly and get your score instantly. Fail 3 or more? Money is going in the trash.</p>
 </header>
 
 <!-- ── CHECKLIST ── -->
 <main class="audit-wrap">
-  <div class="progress-ind" id="progressInd">0 of 7 answered</div>
+  <div class="progress-ind" id="progressInd">0 de 7 respondidas</div>
   <div id="questions">
     <div class="q-card" data-q="1">
       <div class="q-left"><div class="q-num">01</div>
         <div>
           <div class="q-text" data-i18n="q1">Is your pixel correctly installed and firing on every key event?</div>
-          <div class="q-desc" data-i18n="d1">It's the code that connects your site with Meta to track visits, purchases and audiences.</div>
+          <div class="q-desc" data-i18n="d1">Es el código que conecta tu sitio con Meta para rastrear visitas, compras y audiencias.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -59,7 +59,7 @@
       <div class="q-left"><div class="q-num">02</div>
         <div>
           <div class="q-text" data-i18n="q2">Are you excluding audiences that already purchased?</div>
-          <div class="q-desc" data-i18n="d2">Without exclusions you pay to reach people who are already customers and won't buy again.</div>
+          <div class="q-desc" data-i18n="d2">Sin exclusiones pagas para impactar a gente que ya es cliente y no va a volver a comprar.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -71,7 +71,7 @@
       <div class="q-left"><div class="q-num">03</div>
         <div>
           <div class="q-text" data-i18n="q3">Are the first 3 seconds of your creative optimized to stop the scroll?</div>
-          <div class="q-desc" data-i18n="d3">70% of people decide whether to keep watching in the first 3 seconds.</div>
+          <div class="q-desc" data-i18n="d3">El 70% de las personas decide si sigue viendo en los primeros 3 segundos.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -83,7 +83,7 @@
       <div class="q-left"><div class="q-num">04</div>
         <div>
           <div class="q-text" data-i18n="q4">Does your CTA match the funnel stage the user is in?</div>
-          <div class="q-desc" data-i18n="d4">Cold = educate and build interest. Warm = invite to buy directly.</div>
+          <div class="q-desc" data-i18n="d4">Frío = educar y generar interés. Caliente = invitar a comprar directamente.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -95,7 +95,7 @@
       <div class="q-left"><div class="q-num">05</div>
         <div>
           <div class="q-text" data-i18n="q5">Do you have at least 3 ad variants running in parallel?</div>
-          <div class="q-desc" data-i18n="d5">Without variants you can't know what works. The algorithm needs options to optimize.</div>
+          <div class="q-desc" data-i18n="d5">Sin variantes no puedes saber qué funciona. El algoritmo necesita opciones para optimizar.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -107,7 +107,7 @@
       <div class="q-left"><div class="q-num">06</div>
         <div>
           <div class="q-text" data-i18n="q6">Does your landing page load in under 3 seconds on mobile?</div>
-          <div class="q-desc" data-i18n="d6">Every extra second of load time cuts conversion by 20%. Test with PageSpeed Insights.</div>
+          <div class="q-desc" data-i18n="d6">Cada segundo extra de carga reduce la conversión un 20%. Prueba con PageSpeed Insights.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -119,7 +119,7 @@
       <div class="q-left"><div class="q-num">07</div>
         <div>
           <div class="q-text" data-i18n="q7">Is retargeting active with a 7-day window?</div>
-          <div class="q-desc" data-i18n="d7">97% of visitors don't buy on first contact. Retargeting recovers that traffic.</div>
+          <div class="q-desc" data-i18n="d7">El 97% de visitantes no compra en el primer contacto. El retargeting recupera ese tráfico.</div>
         </div>
       </div>
       <div class="q-btns">
@@ -130,16 +130,16 @@
   </div>
 
   <!-- ── DIAGNOSIS (visible cuando las 7 están respondidas) ── -->
-  <p class="all-answered" id="allAnswered" data-i18n="c.line">You've answered everything. Here's your diagnosis:</p>
+  <p class="all-answered" id="allAnswered" data-i18n="c.line">Ya respondiste todo. Aquí está tu diagnóstico:</p>
   <div class="diagnosis" id="diagnosis">
     <div class="diag-num" id="diagNum">0</div>
-    <div class="diag-caption" data-i18n="diag.caption">NOs answered</div>
+    <div class="diag-caption" data-i18n="diag.caption">NOs respondidos</div>
     <p class="diag-label" id="diagLabel"></p>
   </div>
 
   <!-- ── CONTACT + SUBMIT ── -->
   <form class="audit-form gated" id="auditForm" onsubmit="submitAudit(event)">
-    <div class="af-title" data-i18n="f.title">GET THE <span>FULL ANALYSIS</span></div>
+    <div class="af-title" data-i18n="f.title">RECIBE EL <span>ANÁLISIS COMPLETO</span></div>
     <p class="af-sub" data-i18n="f.sub">Tell us where to send your results and recommendations.</p>
     <div class="form-row">
       <div class="form-group">
@@ -155,7 +155,7 @@
       <label data-i18n="f.company">Company / Instagram (optional)</label>
       <input type="text" id="fCompany" data-i18n-ph="ph.company" placeholder="@yourbrand">
     </div>
-    <button type="submit" class="audit-submit" id="auditBtn" data-i18n="f.btn">Send My Diagnosis →</button>
+    <button type="submit" class="audit-submit" id="auditBtn" data-i18n="f.btn">Enviar Mi Diagnóstico →</button>
     <p class="audit-note" data-i18n="f.note">Free. No spam. Your answers go straight to our strategy team.</p>
   </form>
 

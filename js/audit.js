@@ -84,7 +84,9 @@
     }
   };
 
-  let LANG = localStorage.getItem('voltren-lang') || 'en';
+  // La auditoría arranca en español por defecto (funnel de Instagram ES);
+  // se respeta el idioma que el visitante ya haya elegido con el toggle.
+  let LANG = localStorage.getItem('voltren-lang') || 'es';
 
   function T(key) { return I18N[LANG][key] || I18N.en[key] || ''; }
 
