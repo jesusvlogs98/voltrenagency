@@ -398,9 +398,11 @@
   .diagnosis {
     display: none;
     padding: 40px 44px;
-    background: rgba(255,255,255,0.035);
+    margin: 24px 0;
+    background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.07);
     border-left: 4px solid var(--blue);
+    border-radius: 8px;
   }
   .diagnosis.show { display: block; }
 
