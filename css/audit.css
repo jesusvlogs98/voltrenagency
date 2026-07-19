@@ -364,3 +364,69 @@
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; text-align: center; }
   }
+
+  /* ── PROGRESS + DIAGNOSIS (nuevos) ── */
+  .progress-ind {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 18px;
+  }
+
+  .q-desc {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid-gray);
+    line-height: 1.55;
+  }
+
+  .all-answered {
+    display: none;
+    margin: 44px 0 18px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .all-answered.show { display: block; }
+
+  .diagnosis {
+    display: none;
+    padding: 40px 32px;
+    text-align: center;
+    border: 1px solid rgba(26,108,255,0.35);
+    background: linear-gradient(180deg, rgba(26,108,255,0.08), transparent);
+  }
+  .diagnosis.show { display: block; }
+
+  .diag-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--blue);
+  }
+
+  .diag-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-top: 4px;
+  }
+
+  .diag-label {
+    margin: 20px auto 0;
+    max-width: 480px;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--off-white);
+    line-height: 1.6;
+  }
+
+  .audit-form.gated { display: none; }

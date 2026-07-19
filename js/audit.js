@@ -4,7 +4,7 @@
   const I18N = {
     en: {
       'nav.services': 'Services', 'nav.why': 'Why Us', 'nav.audit': 'Free Audit', 'nav.cta': 'Get Started',
-      'h.eyebrow': 'Free Self-Audit · No Email Walls',
+      'h.eyebrow': 'Free Self-Audit · Instant Results',
       'h.title': 'THE 5-MINUTE<br><span>ADS AUDIT</span>',
       'h.sub': "The exact checklist we use to diagnose <strong>why Meta Ads aren't converting</strong>. Answer 7 questions honestly and get your score instantly. Fail 3 or more? Money is going in the trash.",
       'q1': 'Is your pixel correctly installed and firing on every key event?',
@@ -14,11 +14,24 @@
       'q5': 'Do you have at least 3 ad variants running in parallel?',
       'q6': 'Does your landing page load in under 3 seconds on mobile?',
       'q7': 'Is retargeting active with a 7-day window?',
+      'd1': "It's the code that connects your site with Meta to track visits, purchases and audiences.",
+      'd2': "Without exclusions you pay to reach people who are already customers and won't buy again.",
+      'd3': '70% of people decide whether to keep watching in the first 3 seconds.',
+      'd4': 'Cold = educate and build interest. Warm = invite to buy directly.',
+      'd5': "Without variants you can't know what works. The algorithm needs options to optimize.",
+      'd6': 'Every extra second of load time cuts conversion by 20%. Test with PageSpeed Insights.',
+      'd7': "97% of visitors don't buy on first contact. Retargeting recovers that traffic.",
       'btn.yes': 'Yes', 'btn.no': 'No',
-      'f.title': 'GET YOUR <span>SCORE</span>',
+      'prog': '{n} of 7 answered',
+      'c.line': "You've answered everything. Here's your diagnosis:",
+      'diag.caption': 'NOs answered',
+      'diag.0': 'Good shape. Routine review recommended.',
+      'diag.3': 'Budget is leaking. Act this week.',
+      'diag.5': 'Urgent audit. Money is being lost today.',
+      'f.title': 'GET THE <span>FULL ANALYSIS</span>',
       'f.sub': 'Tell us where to send your results and recommendations.',
       'f.name': 'Name', 'f.email': 'Email', 'f.company': 'Company / Instagram (optional)',
-      'f.btn': 'Get My Score →',
+      'f.btn': 'Send My Diagnosis →',
       'f.note': 'Free. No spam. Your answers go straight to our strategy team.',
       'r.label': 'Your Ads Health Score',
       'r.cta': 'Book My Free Audit →',
@@ -31,7 +44,7 @@
     },
     es: {
       'nav.services': 'Servicios', 'nav.why': 'Por Qué Nosotros', 'nav.audit': 'Auditoría Gratis', 'nav.cta': 'Empezar',
-      'h.eyebrow': 'Autoauditoría Gratis · Sin Muros de Email',
+      'h.eyebrow': 'Autoauditoría Gratis · Resultado Inmediato',
       'h.title': 'LA AUDITORÍA DE ADS<br><span>EN 5 MINUTOS</span>',
       'h.sub': 'El checklist exacto que usamos para diagnosticar <strong>por qué tus Meta Ads no están convirtiendo</strong>. Responde 7 preguntas con honestidad y recibe tu puntaje al instante. ¿Fallaste 3 o más? Hay dinero yéndose a la basura.',
       'q1': '¿Tu pixel está correctamente instalado y disparando en cada evento clave?',
@@ -41,11 +54,24 @@
       'q5': '¿Tienes al menos 3 variantes de anuncio corriendo en paralelo?',
       'q6': '¿Tu landing page carga en menos de 3 segundos en móvil?',
       'q7': '¿Tienes retargeting activo con ventana de 7 días?',
+      'd1': 'Es el código que conecta tu sitio con Meta para rastrear visitas, compras y audiencias.',
+      'd2': 'Sin exclusiones pagas para impactar a gente que ya es cliente y no va a volver a comprar.',
+      'd3': 'El 70% de las personas decide si sigue viendo en los primeros 3 segundos.',
+      'd4': 'Frío = educar y generar interés. Caliente = invitar a comprar directamente.',
+      'd5': 'Sin variantes no puedes saber qué funciona. El algoritmo necesita opciones para optimizar.',
+      'd6': 'Cada segundo extra de carga reduce la conversión un 20%. Prueba con PageSpeed Insights.',
+      'd7': 'El 97% de visitantes no compra en el primer contacto. El retargeting recupera ese tráfico.',
       'btn.yes': 'Sí', 'btn.no': 'No',
-      'f.title': 'RECIBE TU <span>PUNTAJE</span>',
+      'prog': '{n} de 7 respondidas',
+      'c.line': 'Ya respondiste todo. Aquí está tu diagnóstico:',
+      'diag.caption': 'NOs respondidos',
+      'diag.0': 'Buen estado. Revisión de rutina recomendada.',
+      'diag.3': 'Hay fugas de presupuesto. Actúa esta semana.',
+      'diag.5': 'Auditoría urgente. Hay dinero perdiéndose hoy.',
+      'f.title': 'RECIBE EL <span>ANÁLISIS COMPLETO</span>',
       'f.sub': 'Dinos a dónde enviamos tus resultados y recomendaciones.',
       'f.name': 'Nombre', 'f.email': 'Email', 'f.company': 'Empresa / Instagram (opcional)',
-      'f.btn': 'Ver Mi Puntaje →',
+      'f.btn': 'Enviar Mi Diagnóstico →',
       'f.note': 'Gratis. Sin spam. Tus respuestas van directo a nuestro equipo de estrategia.',
       'r.label': 'Tu Puntaje de Salud de Ads',
       'r.cta': 'Agendar Mi Auditoría Gratis →',
@@ -73,6 +99,8 @@
     });
     document.documentElement.lang = LANG;
     document.getElementById('langToggle').textContent = LANG === 'es' ? 'EN' : 'ES';
+    // Re-render dynamic texts (progress, diagnosis) in the new language
+    updateChecklistUI(false);
     // Re-mark selected answers (innerHTML reset removes nothing, classes persist on buttons)
     if (document.getElementById('result').classList.contains('show')) renderResult();
   }
@@ -85,6 +113,29 @@
 
   // ── Checklist logic ──
   const answers = {};
+  let diagnosisRevealed = false;
+
+  // Progreso "X de 7" + diagnóstico inline cuando las 7 están respondidas
+  function updateChecklistUI(scrollOnReveal) {
+    const n = Object.keys(answers).length;
+    document.getElementById('progressInd').textContent = T('prog').replace('{n}', n);
+
+    if (n < 7) return;
+
+    const fails = Object.values(answers).filter(a => a === 'no').length;
+    document.getElementById('diagNum').textContent = fails;
+    const key = fails <= 2 ? 'diag.0' : fails <= 4 ? 'diag.3' : 'diag.5';
+    document.getElementById('diagLabel').textContent = T(key);
+
+    document.getElementById('allAnswered').classList.add('show');
+    document.getElementById('diagnosis').classList.add('show');
+    document.getElementById('auditForm').classList.remove('gated');
+
+    if (scrollOnReveal && !diagnosisRevealed) {
+      diagnosisRevealed = true;
+      document.getElementById('diagnosis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 
   document.querySelectorAll('.q-card').forEach(card => {
     card.querySelectorAll('.q-btn').forEach(btn => {
@@ -94,6 +145,7 @@
         card.classList.add('answered');
         card.querySelectorAll('.q-btn').forEach(b => b.classList.remove('sel-yes', 'sel-no'));
         btn.classList.add(btn.dataset.a === 'yes' ? 'sel-yes' : 'sel-no');
+        updateChecklistUI(true);
       });
     });
   });
