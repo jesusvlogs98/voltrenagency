@@ -34,6 +34,8 @@
       'f.phone': 'Phone / WhatsApp',
       'f.btn': 'Send My Diagnosis →',
       'f.note': 'Free. No spam. Your answers go straight to our strategy team.',
+      'f.err': 'Something went wrong. Please try again.',
+      'f.success': "Done! Check your inbox — we've sent your full diagnosis.",
       'r.label': 'Your Ads Health Score',
       'r.cta': 'Book My Free Audit →',
       'ft.copy': '© 2026 Voltren Agency · voltrenagency.com',
@@ -76,6 +78,8 @@
       'f.phone': 'Teléfono / WhatsApp',
       'f.btn': 'Enviar Mi Diagnóstico →',
       'f.note': 'Gratis. Sin spam. Tus respuestas van directo a nuestro equipo de estrategia.',
+      'f.err': 'Algo salió mal. Intenta de nuevo.',
+      'f.success': '¡Listo! Revisa tu correo — te enviamos tu diagnóstico completo.',
       'r.label': 'Tu Puntaje de Salud de Ads',
       'r.cta': 'Agendar Mi Auditoría Gratis →',
       'ft.copy': '© 2026 Voltren Agency · voltrenagency.com',
@@ -107,8 +111,6 @@
     document.getElementById('langToggle').textContent = LANG === 'es' ? 'EN' : 'ES';
     // Re-render dynamic texts (progress, diagnosis) in the new language
     updateChecklistUI(false);
-    // Re-mark selected answers (innerHTML reset removes nothing, classes persist on buttons)
-    if (document.getElementById('result').classList.contains('show')) renderResult();
   }
 
   function toggleLang() {
@@ -156,14 +158,6 @@
     });
   });
 
-  let lastScore = null, lastFails = null;
-
-  function renderResult() {
-    document.getElementById('scoreNum').textContent = lastScore;
-    const msg = lastFails >= 3 ? T('msg.bad').replace('{n}', lastFails) : T('msg.good');
-    document.getElementById('resultMsg').innerHTML = msg;
-  }
-
   async function submitAudit(e) {
     e.preventDefault();
     if (Object.keys(answers).length < 7) {
@@ -177,12 +171,14 @@
 
     const fails = Object.values(answers).filter(a => a === 'no').length;
     const score = 7 - fails;
-    lastScore = score; lastFails = fails;
 
     // Human-readable summary for CRM + Telegram
     const summary = [1,2,3,4,5,6,7]
       .map(i => `${i}. ${I18N.es['q' + i]} → ${answers[i] === 'yes' ? 'SÍ ✓' : 'NO ✗'}`)
       .join('\n');
+
+    const errEl = document.getElementById('formError');
+    errEl.style.display = 'none';
 
     const payload = {
       name: document.getElementById('fName').value,
@@ -197,20 +193,29 @@
     };
 
     try {
-      await fetch(WEBHOOK_URL, {
+      // n8n guarda el lead en el CRM, notifica a Telegram/Discord y crea el
+      // contacto en Brevo (lista 2) del lado del servidor — la API key nunca
+      // viaja al navegador. Un 2xx del webhook confirma que se recibió.
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ body: payload })
       });
+      if (!res.ok) throw new Error('webhook status ' + res.status);
     } catch (err) {
-      // Show the score anyway — the lead sees value even if the webhook hiccups
+      errEl.textContent = T('f.err');
+      errEl.style.display = 'block';
+      btn.textContent = T('f.btn');
+      btn.disabled = false;
+      return;
     }
 
-    renderResult();
-    document.getElementById('result').classList.add('show');
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    btn.textContent = T('f.btn');
-    btn.disabled = false;
+    // Éxito: ocultar el formulario y mostrar la confirmación en su lugar
+    document.getElementById('auditForm').style.display = 'none';
+    const okEl = document.getElementById('formSuccess');
+    okEl.textContent = T('f.success');
+    okEl.style.display = 'block';
+    okEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   applyLang();
