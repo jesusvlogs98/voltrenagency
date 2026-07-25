@@ -92,9 +92,10 @@
     }
   };
 
-  // La auditoría arranca en español por defecto (funnel de Instagram ES);
-  // se respeta el idioma que el visitante ya haya elegido con el toggle.
-  let LANG = localStorage.getItem('voltren-lang') || 'es';
+  // El idioma lo decide la URL: "/audit.html" = inglés, "/es/audit.html" = español.
+  // Cada página trae su copy estático en el HTML; aquí solo se rellenan los
+  // textos dinámicos (progreso, diagnóstico, estados del formulario).
+  const LANG = (document.documentElement.lang === 'es') ? 'es' : 'en';
 
   function T(key) { return I18N[LANG][key] || I18N.en[key] || ''; }
 
@@ -108,15 +109,8 @@
       if (v) el.placeholder = v;
     });
     document.documentElement.lang = LANG;
-    document.getElementById('langToggle').textContent = LANG === 'es' ? 'EN' : 'ES';
-    // Re-render dynamic texts (progress, diagnosis) in the new language
+    // Render dynamic texts (progress, diagnosis) in the page language
     updateChecklistUI(false);
-  }
-
-  function toggleLang() {
-    LANG = LANG === 'es' ? 'en' : 'es';
-    localStorage.setItem('voltren-lang', LANG);
-    applyLang();
   }
 
   // ── Checklist logic ──
@@ -177,6 +171,17 @@
       .map(i => `${i}. ${I18N.es['q' + i]} → ${answers[i] === 'yes' ? 'SÍ ✓' : 'NO ✗'}`)
       .join('\n');
 
+    // Atributos planos con los nombres que espera Brevo. Q1..Q7 en texto y
+    // SCORE = cantidad de NOs (sin invertir), para mapear 1:1 en n8n.
+    const attributes = {
+      FIRSTNAME: document.getElementById('fName').value,
+      EMPRESA: document.getElementById('fCompany').value,
+      SCORE: fails
+    };
+    [1,2,3,4,5,6,7].forEach(i => {
+      attributes['Q' + i] = answers[i] === 'yes' ? 'Sí' : 'No';
+    });
+
     const errEl = document.getElementById('formError');
     errEl.style.display = 'none';
 
@@ -189,7 +194,8 @@
       score: score,
       failed: fails,
       summary: summary,
-      lang: LANG
+      lang: LANG,
+      attributes: attributes
     };
 
     try {
