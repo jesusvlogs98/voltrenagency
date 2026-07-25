@@ -20,13 +20,30 @@
   <link rel="alternate" hreflang="es" href="https://voltrenagency.com/es/">
   <link rel="alternate" hreflang="x-default" href="https://voltrenagency.com/">
 
+  <!-- Icons / PWA -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0A0E14">
+
+  <!-- Local SEO (Sarasota, FL) -->
+  <meta name="geo.region" content="US-FL">
+  <meta name="geo.placename" content="Sarasota, Florida">
+  <meta name="geo.position" content="27.3364;-82.5307">
+  <meta name="ICBM" content="27.3364, -82.5307">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://voltrenagency.com/">
   <meta property="og:title" content="Voltren Agency — Marketing & Advertising Agency in Sarasota, FL">
   <meta property="og:description" content="Results-driven marketing agency in Sarasota, FL. Meta Ads, Google Ads, video production and brand strategy. Built to Dominate.">
-  <meta property="og:image" content="https://voltrenagency.com/og-image.jpg">
+  <meta property="og:image" content="https://voltrenagency.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Voltren Agency — Built to Dominate. Marketing & advertising agency in Sarasota, FL.">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
   <meta property="og:site_name" content="Voltren Agency">
 
   <!-- Twitter Card -->
@@ -34,44 +51,72 @@
   <meta name="twitter:url" content="https://voltrenagency.com/">
   <meta name="twitter:title" content="Voltren Agency — Marketing & Advertising Agency in Sarasota, FL">
   <meta name="twitter:description" content="Results-driven marketing agency in Sarasota, FL. Meta Ads, Google Ads, video production and brand strategy. Built to Dominate.">
-  <meta name="twitter:image" content="https://voltrenagency.com/og-image.jpg">
+  <meta name="twitter:image" content="https://voltrenagency.com/og-image.png">
+  <meta name="twitter:image:alt" content="Voltren Agency — Built to Dominate.">
 
-  <!-- Local Business Schema -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MarketingAgency",
-    "name": "Voltren Agency",
-    "description": "Results-driven marketing and advertising agency in Sarasota, FL specializing in Meta Ads, Google Ads, video production and brand strategy.",
-    "url": "https://voltrenagency.com",
-    "logo": "https://voltrenagency.com/og-image.jpg",
-    "email": "hello@voltrenagency.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Sarasota",
-      "addressRegion": "FL",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "Sarasota, FL",
-      "Tampa Bay, FL",
-      "Florida",
-      "United States"
-    ],
-    "serviceType": [
-      "Meta Ads Management",
-      "Google Ads Management",
-      "Video Production",
-      "Brand Strategy",
-      "Social Media Marketing"
-    ],
-    "slogan": "Built to Dominate",
-    "foundingDate": "2026",
-    "sameAs": [
-      "https://voltrenagency.com"
+    "@graph": [
+      {
+        "@type": "MarketingAgency",
+        "@id": "https://voltrenagency.com/#organization",
+        "name": "Voltren Agency",
+        "description": "Results-driven marketing and advertising agency in Sarasota, FL specializing in Meta Ads, Google Ads, video production and brand strategy.",
+        "url": "https://voltrenagency.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://voltrenagency.com/icon-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://voltrenagency.com/og-image.png",
+        "email": "hello@voltrenagency.com",
+        "slogan": "Built to Dominate",
+        "foundingDate": "2026",
+        "priceRange": "$$",
+        "knowsLanguage": ["en", "es"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sarasota",
+          "addressRegion": "FL",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 27.3364,
+          "longitude": -82.5307
+        },
+        "areaServed": [
+          "Sarasota, FL",
+          "Tampa Bay, FL",
+          "Florida",
+          "United States"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Marketing Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paid Ads (Meta & Google)", "description": "Data-driven Meta and Google campaigns engineered for maximum ROAS." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video & Content Production", "description": "High-production video and photo content built specifically for ads." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand Strategy", "description": "Positioning and visual identity that command attention and build trust." } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://voltrenagency.com/#website",
+        "url": "https://voltrenagency.com/",
+        "name": "Voltren Agency",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://voltrenagency.com/#organization" }
+      }
     ]
   }
   </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css?v=20260719">
 </head>
