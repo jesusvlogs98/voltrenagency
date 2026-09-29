@@ -56,7 +56,8 @@
 
   // Lead destinations
   const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads'; // n8n (kept for existing automations)
-  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFADhZwZYQilRTdMqRSiv9pXIfpFj9MYhFw6pM-YPgen0BFck7Q3RIORGbKlCnJfnyS5WqBQD0hlxqincZuOcI_AgWsHtt9WpWLU1I72vF4ZULXAyKOY829yR3b0wwe3MGKYGudFJxslEcM06cR-HYuq8W8pJMoHSPYRlgrD3tzu1nSkrdHM-nxRyxSJYgfcmM4hDN8kL-uMtxxA==';
+  // Homepage-specific Brevo form (separate from the /contact.html + /es/contacto.html form)
+  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFAG9D4Uh2h75QX_2LucOOernaAQzRoez05905_XaPSPHvnifTFpWmi1Xz22F0KilcEm4z1U6NfRsHxzSY54uq_xMmZVUHcaCLoimsmjwdkkoLXfVc_SOn4IQauaO1v_sSqSQclzAqUoMvOPefoGTXkS5FR_P2cWu8JCLn4XBA5xL4LhQDNW9eXm2dkwugAxawHszbVTpUsolHow==';
 
   // Form submit
   async function handleSubmit(e) {
