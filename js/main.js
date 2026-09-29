@@ -54,10 +54,8 @@
     es: { send: 'Enviar Mi Información →', sending: 'Enviando...', sent: 'Mensaje Enviado ✓', error: 'Error — Intenta de Nuevo' }
   };
 
-  // Lead destinations
-  const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads'; // n8n (kept for existing automations)
-  // Homepage-specific Brevo form (separate from the /contact.html + /es/contacto.html form)
-  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFAG9D4Uh2h75QX_2LucOOernaAQzRoez05905_XaPSPHvnifTFpWmi1Xz22F0KilcEm4z1U6NfRsHxzSY54uq_xMmZVUHcaCLoimsmjwdkkoLXfVc_SOn4IQauaO1v_sSqSQclzAqUoMvOPefoGTXkS5FR_P2cWu8JCLn4XBA5xL4LhQDNW9eXm2dkwugAxawHszbVTpUsolHow==';
+  // Webhook URL
+  const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads';
 
   // Form submit
   async function handleSubmit(e) {
@@ -80,43 +78,12 @@
       lang:      LANG
     };
 
-    // Field names must match the Brevo contact attributes on the "main page leads" form.
-    // service/budget/city now have their own attributes, so they go as separate fields.
-    const brevoBody = new URLSearchParams();
-    brevoBody.append('EMAIL',     formData.email);
-    brevoBody.append('FIRSTNAME', formData.firstName);
-    brevoBody.append('LASTNAME',  formData.lastName);
-    brevoBody.append('WHATSAPP',  formData.phone);
-    brevoBody.append('EMPRESA',   formData.company);
-    brevoBody.append('SERVICE',   formData.service);
-    brevoBody.append('BUDGET',    formData.budget);
-    brevoBody.append('CITY',      formData.city);
-    brevoBody.append('MESSAGE',   formData.message);
-    brevoBody.append('locale',    LANG);
-    brevoBody.append('email_address_check', ''); // Brevo anti-spam honeypot: must stay empty
-
     try {
-      // Primary destination: Brevo CRM (list "landing page", single opt-in).
-      // no-cors: Brevo returns no CORS headers, so we send without reading the response.
-      await fetch(BREVO_FORM_ACTION, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: brevoBody.toString()
-      });
-
-      // Keep sending to n8n too (non-blocking; preserves any other automations).
-      fetch(WEBHOOK_URL, {
+      await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ body: formData })
-      }).catch(() => {});
-
-      // Fire the Meta Pixel Lead event on success, if the pixel is present.
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead', { content_name: 'Homepage contact form', content_category: formData.service || '' });
-      }
-
+      });
       btn.textContent = FORM_TXT[LANG].sent;
       btn.style.background = '#0A3B99';
       form.reset();

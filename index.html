@@ -461,60 +461,6 @@
   <div class="footer-copy">© 2026 Voltren Agency · voltrenagency.com · All Rights Reserved</div>
 </footer>
 
-<script src="js/leadform.20260929.js"></script>
-<!-- Homepage lead form -> Brevo (inline & self-contained, like the contact pages; no external cache) -->
-<script>
-  (function () {
-    var BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFAG9D4Uh2h75QX_2LucOOernaAQzRoez05905_XaPSPHvnifTFpWmi1Xz22F0KilcEm4z1U6NfRsHxzSY54uq_xMmZVUHcaCLoimsmjwdkkoLXfVc_SOn4IQauaO1v_sSqSQclzAqUoMvOPefoGTXkS5FR_P2cWu8JCLn4XBA5xL4LhQDNW9eXm2dkwugAxawHszbVTpUsolHow==';
-    var ES = (document.documentElement.lang === 'es');
-    var TXT = ES
-      ? { sending: 'Enviando...', sent: 'Mensaje Enviado ✓', error: 'Error — Intenta de Nuevo' }
-      : { sending: 'Sending...',  sent: 'Message Sent ✓',    error: 'Error — Try Again' };
-    // Overrides any handler from the external JS so the homepage submits exactly
-    // like the contact pages: straight to Brevo, no dependency on cached files.
-    window.handleSubmit = async function (e) {
-      e.preventDefault();
-      var form = e.target;
-      var btn = document.getElementById('submitBtn');
-      var original = btn.textContent;
-      btn.textContent = TXT.sending;
-      btn.disabled = true;
-      var b = new URLSearchParams();
-      b.append('EMAIL',     form[2].value);
-      b.append('FIRSTNAME', form[0].value);
-      b.append('LASTNAME',  form[1].value);
-      b.append('WHATSAPP',  form[4].value);
-      b.append('EMPRESA',   form[3].value);
-      b.append('SERVICE',   form[6].value);
-      b.append('BUDGET',    form[7].value);
-      b.append('CITY',      form[5].value);
-      b.append('MESSAGE',   form[8].value);
-      b.append('locale',    ES ? 'es' : 'en');
-      b.append('email_address_check', '');
-      try {
-        await fetch(BREVO_FORM_ACTION, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: b.toString()
-        });
-        if (typeof fbq === 'function') {
-          fbq('track', 'Lead', { content_name: 'Homepage contact form' });
-        }
-        btn.textContent = TXT.sent;
-        btn.style.background = '#0A3B99';
-        form.reset();
-      } catch (err) {
-        btn.textContent = TXT.error;
-        btn.style.background = '#FF3B5C';
-      }
-      setTimeout(function () {
-        btn.textContent = original;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 4000);
-    };
-  })();
-</script>
+<script src="js/main.js?v=20260929d"></script>
 </body>
 </html>
