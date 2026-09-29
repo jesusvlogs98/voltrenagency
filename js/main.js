@@ -80,25 +80,18 @@
       lang:      LANG
     };
 
-    // Brevo has no attributes for service/budget/city, so fold them into MESSAGE
-    // to keep every field. Labels follow the page language.
-    const L = (LANG === 'es')
-      ? { service: 'Servicio', budget: 'Presupuesto', city: 'Ciudad' }
-      : { service: 'Service',  budget: 'Budget',      city: 'City'   };
-    const extra = [];
-    if (formData.service) extra.push(L.service + ': ' + formData.service);
-    if (formData.budget)  extra.push(L.budget  + ': ' + formData.budget);
-    if (formData.city)    extra.push(L.city    + ': ' + formData.city);
-    const brevoMessage = [formData.message, extra.join(' | ')].filter(Boolean).join('\n\n');
-
-    // Field names must match the Brevo contact attributes.
+    // Field names must match the Brevo contact attributes on the "main page leads" form.
+    // service/budget/city now have their own attributes, so they go as separate fields.
     const brevoBody = new URLSearchParams();
     brevoBody.append('EMAIL',     formData.email);
     brevoBody.append('FIRSTNAME', formData.firstName);
     brevoBody.append('LASTNAME',  formData.lastName);
     brevoBody.append('WHATSAPP',  formData.phone);
     brevoBody.append('EMPRESA',   formData.company);
-    brevoBody.append('MESSAGE',   brevoMessage);
+    brevoBody.append('SERVICE',   formData.service);
+    brevoBody.append('BUDGET',    formData.budget);
+    brevoBody.append('CITY',      formData.city);
+    brevoBody.append('MESSAGE',   formData.message);
     brevoBody.append('locale',    LANG);
     brevoBody.append('email_address_check', ''); // Brevo anti-spam honeypot: must stay empty
 
