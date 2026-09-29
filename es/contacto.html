@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hablemos — Voltren Agency</title>
+<meta name="description" content="Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas con un plan claro para conseguir más clientes.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://voltrenagency.com/es/contacto.html">
+<link rel="alternate" hreflang="en" href="https://voltrenagency.com/contact.html">
+<link rel="alternate" hreflang="es" href="https://voltrenagency.com/es/contacto.html">
+<link rel="alternate" hreflang="x-default" href="https://voltrenagency.com/contact.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0A0E14">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #F8F9FB;
+    --off-white: #EEF1F6;
+    --light-gray: #C8D0DC;
+    --mid-gray: #7A8899;
+    --dark-gray: #1C2431;
+    --black: #0A0E14;
+    --blue: #1A6CFF;
+    --blue-deep: #0A3B99;
+    --blue-glow: rgba(26,108,255,0.15);
+    --error: #FF3B5C;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+  .wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .lang-switch a {
+    color: var(--mid-gray);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .lang-switch a:hover { color: var(--white); }
+  .lang-switch a.active { color: var(--white); background: rgba(255,255,255,0.06); }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    z-index: 1;
+  }
+  .brand svg { width: 26px; height: 26px; }
+  .brand-word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+  .brand-word span { color: var(--blue); }
+  .container {
+    width: 100%;
+    max-width: 480px;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  h1 span { color: var(--blue); }
+  .sub {
+    color: var(--light-gray);
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--off-white);
+  }
+  .points li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 7px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .row { display: flex; gap: 12px; }
+  .row .group { flex: 1; }
+  .group { display: flex; flex-direction: column; gap: 6px; }
+  label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+  input, textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--mid-gray); }
+  input:focus, textarea:focus { border-color: var(--blue); }
+  textarea { resize: none; min-height: 70px; }
+  button {
+    margin-top: 6px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  button:hover { background: #0A5AE8; }
+  button:active { transform: scale(0.98); }
+  button:disabled { opacity: 0.7; cursor: default; }
+  .note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-top: 16px;
+  }
+  footer {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--mid-gray);
+    padding: 20px;
+  }
+  @media (max-width: 480px) {
+    .row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="glow"></div>
+
+  <nav class="lang-switch">
+    <a href="/es/contacto.html" class="active">ES</a>
+    <a href="/contact.html">EN</a>
+  </nav>
+
+  <a href="/es/" class="brand">
+    <svg viewBox="0 0 64 64" fill="none"><polygon points="4,8 20,8 32,40 44,8 60,8 36,56 28,56" fill="#1A6CFF"/></svg>
+    <div class="brand-word">VOLTR<span>EN</span></div>
+  </a>
+
+  <div class="container">
+    <div class="eyebrow">Hablemos de tu negocio</div>
+    <h1>Más clientes.<br>No más <span>intentos</span>.</h1>
+    <p class="sub">Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas con un plan claro y directo.</p>
+
+    <ul class="points">
+      <li>Contenido, anuncios y seguimiento — todo hecho por nosotros</li>
+      <li>Sin contratos largos ni letra pequeña</li>
+      <li>Estrategia adaptada a tu negocio, no una plantilla genérica</li>
+    </ul>
+
+    <form id="leadForm" onsubmit="handleSubmit(event)">
+      <div class="row">
+        <div class="group">
+          <label>Nombre</label>
+          <input type="text" name="firstName" placeholder="Juan" required>
+        </div>
+        <div class="group">
+          <label>Apellido</label>
+          <input type="text" name="lastName" placeholder="Pérez" required>
+        </div>
+      </div>
+      <div class="group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="juan@negocio.com" required>
+      </div>
+      <div class="group">
+        <label>WhatsApp / Teléfono</label>
+        <input type="tel" name="phone" placeholder="+1 941 000 0000" required>
+      </div>
+      <div class="group">
+        <label>Negocio</label>
+        <input type="text" name="company" placeholder="Nombre de tu negocio">
+      </div>
+      <div class="group">
+        <label>¿En qué te ayudamos?</label>
+        <textarea name="message" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
+      </div>
+      <button type="submit" id="submitBtn">Quiero más clientes →</button>
+    </form>
+    <p class="note">Respondemos en menos de 24 horas. Sin spam.</p>
+  </div>
+
+  <footer>© 2026 VOLTREN AGENCY · voltrenagency.com</footer>
+</div>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1448889199645405');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script>
+  // ── Brevo ─────────────────────────────────────────────────────────
+  // Este formulario envía directamente al CRM de Brevo usando el endpoint
+  // del formulario de Brevo (sibforms.com). No se expone ninguna API key.
+  //
+  // CÓMO OBTENER LA URL: en Brevo → Contactos → Formularios → crea/abre tu
+  // formulario → pestaña "Compartir" / "Integrar" → copia la URL del atributo
+  // action="https://XXXXX.sibforms.com/serve/MUIF..." y pégala aquí abajo.
+  // En el constructor del formulario Brevo elige la LISTA destino y activa
+  // el Double Opt-in. Los campos que captura deben incluir los atributos:
+  // EMAIL, FIRSTNAME, LASTNAME, WHATSAPP, EMPRESA (y MESSAGE si lo creas).
+  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFADhZwZYQilRTdMqRSiv9pXIfpFj9MYhFw6pM-YPgen0BFck7Q3RIORGbKlCnJfnyS5WqBQD0hlxqincZuOcI_AgWsHtt9WpWLU1I72vF4ZULXAyKOY829yR3b0wwe3MGKYGudFJxslEcM06cR-HYuq8W8pJMoHSPYRlgrD3tzu1nSkrdHM-nxRyxSJYgfcmM4hDN8kL-uMtxxA==';
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    const form = e.target;
+    const params = new URLSearchParams(window.location.search);
+
+    // Los nombres de campo deben coincidir con los ATRIBUTOS de tu cuenta Brevo.
+    const body = new URLSearchParams();
+    body.append('EMAIL',     form.email.value);
+    body.append('FIRSTNAME', form.firstName.value);
+    body.append('LASTNAME',  form.lastName.value);
+    body.append('WHATSAPP',  form.phone.value);   // atributo WHATSAPP (texto, sin validación estricta)
+    body.append('EMPRESA',   form.company.value);
+    body.append('MESSAGE',   form.message.value); // requiere crear el atributo MESSAGE en Brevo; si no existe, Brevo lo ignora
+    body.append('locale',    'es');
+    body.append('email_address_check', '');       // honeypot anti-spam de Brevo: debe ir vacío
+
+    try {
+      // no-cors: el endpoint de Brevo no devuelve cabeceras CORS, así que
+      // enviamos sin leer la respuesta (el lead igual se registra).
+      await fetch(BREVO_FORM_ACTION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+
+      // Dispara el evento Lead de Meta Pixel solo tras enviar,
+      // para que Meta cuente leads reales y no simples visitas.
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Formulario de contacto',
+          content_category: params.get('utm_campaign') || 'contacto'
+        });
+      }
+
+      btn.textContent = 'Mensaje enviado ✓';
+      btn.style.background = '#0A3B99';
+      form.reset();
+    } catch (err) {
+      btn.textContent = 'Error — Intenta de nuevo';
+      btn.style.background = '#FF3B5C';
+    }
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Talk — Voltren Agency</title>
+<meta name="description" content="Tell us about your business and we'll get back to you in under 24 hours with a clear plan to win more customers.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://voltrenagency.com/contact.html">
+<link rel="alternate" hreflang="en" href="https://voltrenagency.com/contact.html">
+<link rel="alternate" hreflang="es" href="https://voltrenagency.com/es/contacto.html">
+<link rel="alternate" hreflang="x-default" href="https://voltrenagency.com/contact.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0A0E14">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #F8F9FB;
+    --off-white: #EEF1F6;
+    --light-gray: #C8D0DC;
+    --mid-gray: #7A8899;
+    --dark-gray: #1C2431;
+    --black: #0A0E14;
+    --blue: #1A6CFF;
+    --blue-deep: #0A3B99;
+    --blue-glow: rgba(26,108,255,0.15);
+    --error: #FF3B5C;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+  .wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .lang-switch a {
+    color: var(--mid-gray);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .lang-switch a:hover { color: var(--white); }
+  .lang-switch a.active { color: var(--white); background: rgba(255,255,255,0.06); }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    z-index: 1;
+  }
+  .brand svg { width: 26px; height: 26px; }
+  .brand-word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+  .brand-word span { color: var(--blue); }
+  .container {
+    width: 100%;
+    max-width: 480px;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  h1 span { color: var(--blue); }
+  .sub {
+    color: var(--light-gray);
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--off-white);
+  }
+  .points li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 7px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .row { display: flex; gap: 12px; }
+  .row .group { flex: 1; }
+  .group { display: flex; flex-direction: column; gap: 6px; }
+  label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+  input, textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--mid-gray); }
+  input:focus, textarea:focus { border-color: var(--blue); }
+  textarea { resize: none; min-height: 70px; }
+  button {
+    margin-top: 6px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  button:hover { background: #0A5AE8; }
+  button:active { transform: scale(0.98); }
+  button:disabled { opacity: 0.7; cursor: default; }
+  .note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-top: 16px;
+  }
+  footer {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--mid-gray);
+    padding: 20px;
+  }
+  @media (max-width: 480px) {
+    .row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="glow"></div>
+
+  <nav class="lang-switch">
+    <a href="/es/contacto.html">ES</a>
+    <a href="/contact.html" class="active">EN</a>
+  </nav>
+
+  <a href="/" class="brand">
+    <svg viewBox="0 0 64 64" fill="none"><polygon points="4,8 20,8 32,40 44,8 60,8 36,56 28,56" fill="#1A6CFF"/></svg>
+    <div class="brand-word">VOLTR<span>EN</span></div>
+  </a>
+
+  <div class="container">
+    <div class="eyebrow">Let's talk about your business</div>
+    <h1>More customers.<br>No more <span>guessing</span>.</h1>
+    <p class="sub">Tell us about your business and we'll get back to you in under 24 hours with a clear, straight-to-the-point plan.</p>
+
+    <ul class="points">
+      <li>Content, ads, and follow-up — all handled by us</li>
+      <li>No long contracts, no fine print</li>
+      <li>A strategy built for your business, not a generic template</li>
+    </ul>
+
+    <form id="leadForm" onsubmit="handleSubmit(event)">
+      <div class="row">
+        <div class="group">
+          <label>First name</label>
+          <input type="text" name="firstName" placeholder="John" required>
+        </div>
+        <div class="group">
+          <label>Last name</label>
+          <input type="text" name="lastName" placeholder="Smith" required>
+        </div>
+      </div>
+      <div class="group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="john@business.com" required>
+      </div>
+      <div class="group">
+        <label>WhatsApp / Phone</label>
+        <input type="tel" name="phone" placeholder="+1 941 000 0000" required>
+      </div>
+      <div class="group">
+        <label>Business</label>
+        <input type="text" name="company" placeholder="Your business name">
+      </div>
+      <div class="group">
+        <label>How can we help?</label>
+        <textarea name="message" placeholder="Tell us briefly what you need"></textarea>
+      </div>
+      <button type="submit" id="submitBtn">I want more customers →</button>
+    </form>
+    <p class="note">We reply in under 24 hours. No spam.</p>
+  </div>
+
+  <footer>© 2026 VOLTREN AGENCY · voltrenagency.com</footer>
+</div>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1448889199645405');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script>
+  // ── Brevo ─────────────────────────────────────────────────────────
+  // This form submits straight to the Brevo CRM via the Brevo form
+  // endpoint (sibforms.com). No API key is exposed.
+  //
+  // HOW TO GET THE URL: in Brevo → Contacts → Forms → create/open your form
+  // → "Share" / "Embed" tab → copy the action="https://XXXXX.sibforms.com/
+  // serve/MUIF..." URL and paste it below. In the Brevo form builder pick the
+  // target LIST and enable Double Opt-in. The captured fields must include the
+  // attributes: EMAIL, FIRSTNAME, LASTNAME, WHATSAPP, EMPRESA (and MESSAGE if you create it).
+  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFADhZwZYQilRTdMqRSiv9pXIfpFj9MYhFw6pM-YPgen0BFck7Q3RIORGbKlCnJfnyS5WqBQD0hlxqincZuOcI_AgWsHtt9WpWLU1I72vF4ZULXAyKOY829yR3b0wwe3MGKYGudFJxslEcM06cR-HYuq8W8pJMoHSPYRlgrD3tzu1nSkrdHM-nxRyxSJYgfcmM4hDN8kL-uMtxxA==';
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const form = e.target;
+    const params = new URLSearchParams(window.location.search);
+
+    // Field names must match the ATTRIBUTES in your Brevo account.
+    const body = new URLSearchParams();
+    body.append('EMAIL',     form.email.value);
+    body.append('FIRSTNAME', form.firstName.value);
+    body.append('LASTNAME',  form.lastName.value);
+    body.append('WHATSAPP',  form.phone.value);   // WHATSAPP attribute (text, no strict validation)
+    body.append('EMPRESA',   form.company.value);
+    body.append('MESSAGE',   form.message.value); // requires a MESSAGE attribute in Brevo; if it doesn't exist, Brevo ignores it
+    body.append('locale',    'en');
+    body.append('email_address_check', '');       // Brevo anti-spam honeypot: must stay empty
+
+    try {
+      // no-cors: the Brevo endpoint returns no CORS headers, so we send
+      // without reading the response (the lead is still recorded).
+      await fetch(BREVO_FORM_ACTION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+
+      // Fire the Meta Pixel Lead event only after a successful submit,
+      // so Meta only counts real leads, not just page visits.
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Contact form',
+          content_category: params.get('utm_campaign') || 'contact'
+        });
+      }
+
+      btn.textContent = 'Message sent ✓';
+      btn.style.background = '#0A3B99';
+      form.reset();
+    } catch (err) {
+      btn.textContent = 'Error — Please try again';
+      btn.style.background = '#FF3B5C';
+    }
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>
