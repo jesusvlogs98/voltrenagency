@@ -84,16 +84,6 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ body: formData })
       });
-
-      // Fire the Meta Pixel Lead event only after a successful submit,
-      // so Meta only counts real leads, not just page visits.
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
-          content_name: 'Formulario de contacto',
-          content_category: formData.service || 'home'
-        });
-      }
-
       btn.textContent = FORM_TXT[LANG].sent;
       btn.style.background = '#0A3B99';
       form.reset();
