@@ -293,18 +293,7 @@ src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 <script>
-  // ── Brevo ─────────────────────────────────────────────────────────
-  // This form submits straight to the Brevo CRM via the Brevo form
-  // endpoint (sibforms.com). No API key is exposed.
-  //
-  // HOW TO GET THE URL: in Brevo → Contacts → Forms → create/open your form
-  // → "Share" / "Embed" tab → copy the action="https://XXXXX.sibforms.com/
-  // serve/MUIF..." URL and paste it below. In the Brevo form builder pick the
-  // target LIST and enable Double Opt-in. The captured fields must include the
-  // attributes: EMAIL, FIRSTNAME, LASTNAME, WHATSAPP, EMPRESA (and MESSAGE if you create it).
-  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFADhZwZYQilRTdMqRSiv9pXIfpFj9MYhFw6pM-YPgen0BFck7Q3RIORGbKlCnJfnyS5WqBQD0hlxqincZuOcI_AgWsHtt9WpWLU1I72vF4ZULXAyKOY829yR3b0wwe3MGKYGudFJxslEcM06cR-HYuq8W8pJMoHSPYRlgrD3tzu1nSkrdHM-nxRyxSJYgfcmM4hDN8kL-uMtxxA==';
-  // Server-side route (works on mobile / with ad-blockers, unlike the direct sibforms POST).
-  // n8n notifies Discord and (once its Brevo node is added) upserts the contact into Brevo.
+  // Submit exactly like the homepage: POST to n8n, which handles Discord + Brevo (CRM) server-side.
   const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads';
 
   async function handleSubmit(e) {
@@ -315,56 +304,31 @@ src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
     btn.disabled = true;
 
     const form = e.target;
-    const params = new URLSearchParams(window.location.search);
-
-    // Field names must match the ATTRIBUTES in your Brevo account.
-    const body = new URLSearchParams();
-    body.append('EMAIL',     form.email.value);
-    body.append('FIRSTNAME', form.firstName.value);
-    body.append('LASTNAME',  form.lastName.value);
-    body.append('WHATSAPP',  form.phone.value);   // WHATSAPP attribute (text, no strict validation)
-    body.append('EMPRESA',   form.company.value);
-    body.append('MESSAGE',   form.message.value); // requires a MESSAGE attribute in Brevo; if it doesn't exist, Brevo ignores it
-    body.append('locale',    'en');
-    body.append('email_address_check', '');       // Brevo anti-spam honeypot: must stay empty
+    const formData = {
+      firstName: form.firstName.value,
+      lastName:  form.lastName.value,
+      email:     form.email.value,
+      company:   form.company.value,
+      phone:     form.phone.value,
+      city:      '',
+      service:   '',
+      budget:    '',
+      message:   form.message.value,
+      lang:      (document.documentElement.lang === 'es') ? 'es' : 'en',
+      source:    'contact_page',
+      form_title: 'Página de Contacto'
+    };
 
     try {
-      // no-cors: the Brevo endpoint returns no CORS headers, so we send
-      // without reading the response (the lead is still recorded).
-      await fetch(BREVO_FORM_ACTION, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString()
-      });
-
-      // Also send server-side via n8n (same shape as the homepage form).
-      fetch(WEBHOOK_URL, {
+      await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ body: {
-          firstName: form.firstName.value,
-          lastName:  form.lastName.value,
-          email:     form.email.value,
-          company:   form.company.value,
-          phone:     form.phone.value,
-          city:      '',
-          service:   '',
-          budget:    '',
-          message:   form.message.value,
-          lang:      (document.documentElement.lang === 'es') ? 'es' : 'en',
-          source:    'contact_page',
-          form_title: 'Página de Contacto'
-        } })
-      }).catch(() => {});
+        body: JSON.stringify({ body: formData })
+      });
 
-      // Fire the Meta Pixel Lead event only after a successful submit,
-      // so Meta only counts real leads, not just page visits.
+      // Fire the Meta Pixel Lead event only after a successful submit.
       if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
-          content_name: 'Contact form',
-          content_category: params.get('utm_campaign') || 'contact'
-        });
+        fbq('track', 'Lead', { content_name: 'Contact form' });
       }
 
       btn.textContent = 'Message sent ✓';

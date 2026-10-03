@@ -293,19 +293,7 @@ src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 <script>
-  // ── Brevo ─────────────────────────────────────────────────────────
-  // Este formulario envía directamente al CRM de Brevo usando el endpoint
-  // del formulario de Brevo (sibforms.com). No se expone ninguna API key.
-  //
-  // CÓMO OBTENER LA URL: en Brevo → Contactos → Formularios → crea/abre tu
-  // formulario → pestaña "Compartir" / "Integrar" → copia la URL del atributo
-  // action="https://XXXXX.sibforms.com/serve/MUIF..." y pégala aquí abajo.
-  // En el constructor del formulario Brevo elige la LISTA destino y activa
-  // el Double Opt-in. Los campos que captura deben incluir los atributos:
-  // EMAIL, FIRSTNAME, LASTNAME, WHATSAPP, EMPRESA (y MESSAGE si lo creas).
-  const BREVO_FORM_ACTION = 'https://b6cf28ac.sibforms.com/serve/MUIFADhZwZYQilRTdMqRSiv9pXIfpFj9MYhFw6pM-YPgen0BFck7Q3RIORGbKlCnJfnyS5WqBQD0hlxqincZuOcI_AgWsHtt9WpWLU1I72vF4ZULXAyKOY829yR3b0wwe3MGKYGudFJxslEcM06cR-HYuq8W8pJMoHSPYRlgrD3tzu1nSkrdHM-nxRyxSJYgfcmM4hDN8kL-uMtxxA==';
-  // Ruta server-side (funciona en móvil / con ad-blockers, a diferencia del POST directo a sibforms).
-  // n8n notifica a Discord y (al agregar su nodo de Brevo) crea/actualiza el contacto en Brevo.
+  // Envía igual que la home: POST a n8n, que maneja Discord + Brevo (CRM) del lado del servidor.
   const WEBHOOK_URL = 'https://n8n.voltrenagency.com/webhook/voltren-leads';
 
   async function handleSubmit(e) {
@@ -316,56 +304,31 @@ src="https://www.facebook.com/tr?id=1448889199645405&ev=PageView&noscript=1"
     btn.disabled = true;
 
     const form = e.target;
-    const params = new URLSearchParams(window.location.search);
-
-    // Los nombres de campo deben coincidir con los ATRIBUTOS de tu cuenta Brevo.
-    const body = new URLSearchParams();
-    body.append('EMAIL',     form.email.value);
-    body.append('FIRSTNAME', form.firstName.value);
-    body.append('LASTNAME',  form.lastName.value);
-    body.append('WHATSAPP',  form.phone.value);   // atributo WHATSAPP (texto, sin validación estricta)
-    body.append('EMPRESA',   form.company.value);
-    body.append('MESSAGE',   form.message.value); // requiere crear el atributo MESSAGE en Brevo; si no existe, Brevo lo ignora
-    body.append('locale',    'es');
-    body.append('email_address_check', '');       // honeypot anti-spam de Brevo: debe ir vacío
+    const formData = {
+      firstName: form.firstName.value,
+      lastName:  form.lastName.value,
+      email:     form.email.value,
+      company:   form.company.value,
+      phone:     form.phone.value,
+      city:      '',
+      service:   '',
+      budget:    '',
+      message:   form.message.value,
+      lang:      (document.documentElement.lang === 'es') ? 'es' : 'en',
+      source:    'contact_page',
+      form_title: 'Página de Contacto'
+    };
 
     try {
-      // no-cors: el endpoint de Brevo no devuelve cabeceras CORS, así que
-      // enviamos sin leer la respuesta (el lead igual se registra).
-      await fetch(BREVO_FORM_ACTION, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString()
-      });
-
-      // También enviamos server-side vía n8n (misma forma que el formulario de la home).
-      fetch(WEBHOOK_URL, {
+      await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ body: {
-          firstName: form.firstName.value,
-          lastName:  form.lastName.value,
-          email:     form.email.value,
-          company:   form.company.value,
-          phone:     form.phone.value,
-          city:      '',
-          service:   '',
-          budget:    '',
-          message:   form.message.value,
-          lang:      (document.documentElement.lang === 'es') ? 'es' : 'en',
-          source:    'contact_page',
-          form_title: 'Página de Contacto'
-        } })
-      }).catch(() => {});
+        body: JSON.stringify({ body: formData })
+      });
 
-      // Dispara el evento Lead de Meta Pixel solo tras enviar,
-      // para que Meta cuente leads reales y no simples visitas.
+      // Dispara el evento Lead de Meta Pixel solo tras enviar.
       if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
-          content_name: 'Formulario de contacto',
-          content_category: params.get('utm_campaign') || 'contacto'
-        });
+        fbq('track', 'Lead', { content_name: 'Formulario de contacto' });
       }
 
       btn.textContent = 'Mensaje enviado ✓';
